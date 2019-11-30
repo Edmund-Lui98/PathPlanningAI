@@ -8,9 +8,8 @@ Email:   luix5540@mylaurier.ca
 Section: CP468
 -------------------------------------------------------
 """
-from spot import spot
 from aStarAlgorithm import aStar
-
+"""
 def main():
     fv = open("input.txt","r")
     for i in fv:
@@ -42,5 +41,22 @@ def main():
     
     solve = aStar(start,end)
     print(solve)
-        
+"""  
+def main():
+
+    grid = [[1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 1, 0, 0, 0, 0, 0, 0, 1, 1],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 1, 1, 0, 0, 0, 0],
+            [0, 0, 0, 1, 1, 1, 1, 0, 0, 0],
+            [0, 0, 0, 1, 1, 1, 1, 0, 0, 0],
+            [0, 0, 0, 0, 1, 1, 0, 0, 0, 0],
+            [1, 1, 0, 0, 0, 0, 0, 0, 1, 1]]
+
+    start = (4, 2)
+    end = (4, 7)
+
+    path = aStar(grid, start, end)
+    print(path)
+    
 main()
