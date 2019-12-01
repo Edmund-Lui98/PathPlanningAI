@@ -12,6 +12,17 @@ __updated__ = "2018-08-"
 
 
 class spot():
+    """
+    -------------------------------------------------------
+    Initializes a BST node containing value. Child pointers 
+    are None, height is 1.
+    Use: node = _BST_Node(value)
+    -------------------------------------------------------
+    Parameters:
+        prev - the parent spot node
+        location - location of the spot
+    -------------------------------------------------------
+    """
 
     def __init__(self, prev=None, location=None):
         #previous location
@@ -23,6 +34,6 @@ class spot():
         self.g = 0
         self.h = 0
         
-
+    
     def __eq__(self, other):
         return self.location == other.location

@@ -9,54 +9,52 @@ Section: CP468
 -------------------------------------------------------
 """
 from aStarAlgorithm import aStar
-"""
+
 def main():
+    #opening input file
     fv = open("input.txt","r")
-    for i in fv:
-        if i.endswith("\n"):
-            print(i[:-1])
-        else:
-            print(i)
-            
-            
-    cols = 5
-    rows = 5
-
+    
+    #defining variables to make the grid
+    cols = 0
+    rows = 0
+    num_of_robots = 0
+    robot_locations = []
     grid = []
-
-
-    for _ in range(cols):
-        grid.append([])
-    for i in range(cols):
-        for j in range(rows):
-            s = spot(i,j,grid)
-            grid[i].append(s)
-    for i in range(cols):
-        for j in range(rows):
-            grid[i][j].addNeighbours(grid)
-            
+    end = (0,0)
     
-    start = grid[0][0]
-    end = grid[cols-1][rows-1]
     
-    solve = aStar(start,end)
-    print(solve)
-"""  
-def main():
-
-    grid = [[1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-            [1, 1, 0, 0, 0, 0, 0, 0, 1, 1],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 1, 1, 0, 0, 0, 0],
-            [0, 0, 0, 1, 1, 1, 1, 0, 0, 0],
-            [0, 0, 0, 1, 1, 1, 1, 0, 0, 0],
-            [0, 0, 0, 0, 1, 1, 0, 0, 0, 0],
-            [1, 1, 0, 0, 0, 0, 0, 0, 1, 1]]
-
-    start = (4, 2)
-    end = (4, 7)
-
-    path = aStar(grid, start, end)
-    print(path)
+    #going through file and extracting data
+    x = 0
+    for i in fv:
+        z = i[:-1]
+        #cols and rows
+        if x == 0:
+            values = z.split(" ")
+            rows = int(values[0])
+            cols = int(values[1])
+        #number of robots
+        elif x == 1:
+            num_of_robots = int(z) + x
+        #locations of robot
+        elif x <= num_of_robots:
+            values = z.split(" ")
+            a = int(values[0])
+            b = int(values[1])
+            robot_locations.append((a,b))
+        elif x == num_of_robots + 1:
+            values = z.split(" ")
+            a = int(values[0])
+            b = int(values[1])
+            end = (a,b)
+        else:
+            temp_grid = []
+            for j in z:
+                temp_grid.append(int(j))
+            grid.append(temp_grid)
+        x += 1    
     
+    for i in robot_locations:
+        path = aStar(grid, i, end)
+        print(path)
+
 main()
