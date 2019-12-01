@@ -10,6 +10,22 @@ Section: CP468
 """
 from aStarAlgorithm import aStar
 
+def print_grid(grid,path):
+    for j in path:
+        p = j[0]
+        q = j[1]
+        grid[q][p] = "*"
+    for i in grid:
+        print()
+        for j in i:
+            print (j,end = "")
+    for j in path:
+        p = j[0]
+        q = j[1]
+        grid[q][p] = 0
+    print()
+    print("-------------------------------")
+
 def main():
     #opening input file
     fv = open("input.txt","r")
@@ -51,10 +67,15 @@ def main():
             for j in z:
                 temp_grid.append(int(j))
             grid.append(temp_grid)
-        x += 1    
+        x += 1
+         
     
     for i in robot_locations:
-        path = aStar(grid, i, end)
+        path = aStar(grid,i,end)
         print(path)
+        new_grid = grid
+        print_grid(new_grid, path)
+    
+    
 
 main()
